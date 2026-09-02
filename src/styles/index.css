@@ -1,0 +1,267 @@
+:root {
+  --bg: #fff8f2;
+  --card-bg: #ffffff;
+  --primary: #ff8a5c;
+  --primary-dark: #e96f3f;
+  --text: #3a2e2a;
+  --muted: #8a7a72;
+  --border: #f0ddd2;
+  --danger: #d64545;
+  --success: #4caf7d;
+  font-family: "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 24px 20px 64px;
+}
+
+.page-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: var(--muted);
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.step-indicator {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.step-indicator span {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+}
+
+.step-indicator span.active {
+  background: var(--primary);
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+  background: #fff;
+  color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+button {
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  padding: 12px 16px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  width: 100%;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-primary:disabled {
+  background: var(--border);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary-dark);
+  border: 1px solid var(--primary);
+  width: 100%;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--primary-dark);
+  padding: 4px;
+  text-decoration: underline;
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 0.85rem;
+  margin-top: 10px;
+}
+
+.warning-box {
+  background: #fff4e5;
+  border: 1px solid #ffcf8a;
+  color: #8a5a12;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.82rem;
+  margin-top: 10px;
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option-button {
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.option-button.selected {
+  border-color: var(--primary);
+  background: #fff1e9;
+  font-weight: 600;
+}
+
+.hobby-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+  background: #fff;
+}
+
+.hobby-card h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+
+.hobby-card .level-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--primary);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+
+.hobby-card p {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 6px 0 10px;
+}
+
+.level-section h2 {
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 22px 0 8px;
+}
+
+.character-view {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.character-emoji {
+  font-size: 4rem;
+}
+
+.character-level {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.diary-entry {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+}
+
+.diary-entry:last-child {
+  border-bottom: none;
+}
+
+.diary-date {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.search-box {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.search-box input {
+  flex: 1;
+}
+
+.search-box button {
+  background: var(--primary);
+  color: #fff;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.share-summary {
+  text-align: center;
+}
