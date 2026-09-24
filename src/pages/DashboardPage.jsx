@@ -3,15 +3,20 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { api } from "../lib/api.js";
 import CharacterView from "../components/CharacterView.jsx";
 import DiaryList from "../components/DiaryList.jsx";
+import DiaryCalendar from "../components/DiaryCalendar.jsx";
+import DiaryEntryModal from "../components/DiaryEntryModal.jsx";
 
 export default function DashboardPage() {
   const { refresh } = useAuth();
   const [userHobby, setUserHobby] = useState(null);
-  const [content, setContent] = useState("");
   const [error, setError] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedEntry, setSelectedEntry] = useState(null);
+  const [modalError, setModalError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   async function load() {
     const { userHobbies } = await api.listUserHobbies();
@@ -23,17 +28,35 @@ export default function DashboardPage() {
     load();
   }, []);
 
-  async function handleAddDiary(e) {
-    e.preventDefault();
-    if (!content.trim()) return;
-    setError("");
+  function handleSelectDate(dateKey, entry) {
+    setSelectedDate(dateKey);
+    setSelectedEntry(entry);
+    setModalError("");
+  }
+
+  function closeModal() {
+    setSelectedDate(null);
+    setSelectedEntry(null);
+    setModalError("");
+  }
+
+  async function handleAddDiary({ content, mood }) {
+    if (!content.trim() && !mood) {
+      setModalError("内容を入力するか、アイコンを選んでください。");
+      return;
+    }
+    setModalError("");
     setSubmitting(true);
     try {
-      const { userHobby: updated } = await api.addDiaryEntry(userHobby.id, content);
+      const { userHobby: updated } = await api.addDiaryEntry(userHobby.id, {
+        content,
+        mood,
+        entryDate: selectedDate,
+      });
       setUserHobby(updated);
-      setContent("");
+      closeModal();
     } catch (err) {
-      setError(err.message);
+      setModalError(err.message);
     } finally {
       setSubmitting(false);
     }
@@ -79,20 +102,22 @@ export default function DashboardPage() {
       </div>
 
       <div className="card">
-        <p style={{ fontWeight: 600, marginTop: 0 }}>今日の成長日記</p>
-        <form onSubmit={handleAddDiary}>
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="今日やったこと、感じたことを一言"
-            maxLength={1000}
-          />
-          {error && <p className="error-text">{error}</p>}
-          <button className="btn-primary" type="submit" disabled={submitting}>
-            記録する
-          </button>
-        </form>
+        <p style={{ fontWeight: 600, marginTop: 0 }}>継続カレンダー</p>
+        <p className="subtitle">日付をタップして記録・見返しができます。つけ忘れた日も後から埋められます。</p>
+        <DiaryCalendar entries={userHobby.diaryEntries} onSelectDate={handleSelectDate} />
       </div>
+
+      {selectedDate && (
+        <DiaryEntryModal
+          key={selectedDate}
+          dateKey={selectedDate}
+          entry={selectedEntry}
+          onClose={closeModal}
+          onSubmit={handleAddDiary}
+          submitting={submitting}
+          error={modalError}
+        />
+      )}
 
       <div className="card">
         <p style={{ fontWeight: 600, marginTop: 0 }}>これまでの記録</p>

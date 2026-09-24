@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     const userHobbies = await prisma.userHobby.findMany({
       where: { userId: user.id },
-      include: { hobby: true, diaryEntries: { orderBy: { createdAt: "desc" } } },
+      include: { hobby: true, diaryEntries: { orderBy: { entryDate: "desc" } } },
       orderBy: { startedAt: "desc" },
     });
     res.status(200).json({ userHobbies });

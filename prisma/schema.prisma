@@ -64,8 +64,11 @@ model DiaryEntry {
   id          String    @id @default(cuid())
   userHobbyId String
   userHobby   UserHobby @relation(fields: [userHobbyId], references: [id], onDelete: Cascade)
-  content     String
+  entryDate   DateTime  @db.Date // その日記が「どの日」の記録かを表す（後からの穴埋め入力に対応するため createdAt とは別に持つ）
+  content     String    @default("")
+  mood        String? // 文字を書かなくても記録できるようにするための顔アイコン（イレギュラー「空っぽ」対策）
   createdAt   DateTime  @default(now())
 
+  @@unique([userHobbyId, entryDate]) // 1日1件まで（イレギュラー「過剰」対策）
   @@index([userHobbyId])
 }

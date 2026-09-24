@@ -25,8 +25,11 @@ export const api = {
   createUserHobby: (hobbyId, characterName) =>
     request("/user-hobbies", { method: "POST", body: JSON.stringify({ hobbyId, characterName }) }),
   listUserHobbies: () => request("/user-hobbies"),
-  addDiaryEntry: (userHobbyId, content) =>
-    request(`/user-hobbies/${userHobbyId}/diary`, { method: "POST", body: JSON.stringify({ content }) }),
+  addDiaryEntry: (userHobbyId, { content, mood, entryDate }) =>
+    request(`/user-hobbies/${userHobbyId}/diary`, {
+      method: "POST",
+      body: JSON.stringify({ content, mood, entryDate }),
+    }),
   createShareLink: (userHobbyId) => request(`/user-hobbies/${userHobbyId}/share`, { method: "POST" }),
   getSharePage: (token) => request(`/share/${token}`),
 };

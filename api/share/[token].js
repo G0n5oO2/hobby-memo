@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     where: { shareToken: token },
     include: {
       hobby: true,
-      diaryEntries: { orderBy: { createdAt: "desc" }, take: 5 },
+      diaryEntries: { orderBy: { entryDate: "desc" }, take: 5 },
     },
   });
 

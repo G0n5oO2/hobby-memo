@@ -265,3 +265,117 @@ button {
 .share-summary {
   text-align: center;
 }
+
+.diary-calendar {
+  user-select: none;
+}
+
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-weekdays {
+  margin-bottom: 4px;
+}
+
+.calendar-weekday {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.calendar-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 2px;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.calendar-cell.empty {
+  border: none;
+  background: none;
+}
+
+.calendar-cell.today {
+  border-color: var(--primary);
+  font-weight: 600;
+}
+
+.calendar-cell.has-entry {
+  background: #fff1e9;
+}
+
+.calendar-cell.future {
+  color: var(--border);
+  background: #fbfbfb;
+  cursor: not-allowed;
+}
+
+.calendar-mark {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 46, 42, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+
+.modal-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 18px;
+  width: 100%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.mood-picker {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.mood-button {
+  flex: 1;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 1.4rem;
+  padding: 8px 0;
+}
+
+.mood-button.selected {
+  border-color: var(--primary);
+  background: #fff1e9;
+}
